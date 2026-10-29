@@ -1,0 +1,24 @@
+[flake8]
+# The original code uses long lines on purpose, so the limit is generous.
+max-line-length = 160
+# Complexity warning: only flag really tangled functions.
+max-complexity = 40
+exclude =
+    .git,
+    .venv,
+    __pycache__,
+    node_modules,
+    OpenStrap,
+    mobile,
+    token-server,
+    tools,
+    docs
+# E501 is handled by max-line-length; W503/W504 are style choices that contradict each other.
+extend-ignore = W503, W504, E203, E226, E731,
+    E302, E305, W293, E401, E701, E741
+# ^ E302/E305/W293/E401/E701/E741 are cosmetic spacing/naming notes in the ORIGINAL code.
+#   We ignore them instead of reformatting the app, so the lint stage only fails on real problems.
+per-file-ignores =
+    # Two real warnings in the original code, left untouched on purpose (see README "Changes from the original").
+    api_ingest.py: F401
+    google_health_sync.py: F811

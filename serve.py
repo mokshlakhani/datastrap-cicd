@@ -91,7 +91,9 @@ def free_port(start=8088):
 
 def serve(port=None, open_browser=True):
     port = port or free_port()
-    server = ThreadingHTTPServer(('127.0.0.1', port), partial(DashboardHandler, directory=HERE))
+    # HOST defaults to this computer only; the Docker image sets HOST=0.0.0.0 so the port can be published.
+    host = os.environ.get('HOST', '127.0.0.1')
+    server = ThreadingHTTPServer((host, port), partial(DashboardHandler, directory=HERE))
     url = f'http://127.0.0.1:{port}/'
     print(f'Dashboard running at {url}  (press Ctrl+C to stop)')
     if open_browser:
