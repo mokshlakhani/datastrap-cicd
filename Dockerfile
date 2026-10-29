@@ -24,7 +24,7 @@ WORKDIR /app
 # Copy only the files the dashboard needs (serve.py only serves a fixed list of files anyway).
 COPY --chown=appuser:appuser serve.py index.html app.js styles.css icons.js demo_data.json placeholder-man.webp placeholder-woman.webp ./
 
-USER appuser
+USER 10001
 
 # serve.py refuses requests whose Host port differs from its own port,
 # so publish the SAME number on both sides: docker run -e PORT=8080 -p 8080:8080 ...
@@ -32,7 +32,7 @@ EXPOSE 8080
 
 # Docker asks "are you healthy?" every 10 s by fetching the home page.
 HEALTHCHECK --interval=10s --timeout=3s --start-period=5s --retries=3 \
-    CMD python -c "import os,urllib.request; urllib.request.urlopen('http://127.0.0.1:%s/' % os.environ['PORT'], timeout=2)"
+    CMD ["python", "-c", "import os,urllib.request; urllib.request.urlopen('http://127.0.0.1:%s/' % os.environ['PORT'], timeout=2)"]
 
 # --no-browser: there is no browser inside a container. "exec" makes Python PID 1 so docker stop works fast.
 CMD ["sh", "-c", "exec python serve.py --port ${PORT} --no-browser"]
