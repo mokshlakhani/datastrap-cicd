@@ -30,3 +30,12 @@ to-do list.md
 
 # Personal worked examples
 docs/*.local.md
+
+# --- Added for the CI/CD project ---
+docker/.env
+reports/
+coverage.xml
+.coverage
+.pytest_cache/
+.scannerwork/
+node_modules/

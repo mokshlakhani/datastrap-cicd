@@ -1,0 +1,14 @@
+# Which files "coverage" measures when pytest runs.
+[run]
+# Store relative paths so SonarQube can match the files.
+relative_files = True
+source = .
+omit =
+    tests/*
+    ci/*
+    mobile/*
+    token-server/*
+    OpenStrap/*
+    tools/*
+    .venv/*
+    setup.py

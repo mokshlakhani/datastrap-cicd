@@ -1,0 +1,37 @@
+# OPTIONAL second CI, only to compare with Jenkins in your report.
+# The real pipeline is the Jenkinsfile; this one just runs lint + tests on GitHub's servers (no deploy, no Sonar).
+name: Optional lightweight CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Python packages
+        run: |
+          python -m venv .venv
+          .venv/bin/pip install -r requirements.txt -r requirements-dev.txt
+      - name: Lint
+        run: .venv/bin/flake8 .
+      - name: Python tests
+        run: .venv/bin/pytest --cov
+      - name: Token server tests
+        run: npm ci && npm test
+        working-directory: token-server
+      - name: Mobile tests (no personal data needed)
+        run: npm ci && npm run test:ci
+        working-directory: mobile

@@ -1,0 +1,15 @@
+# Plugins the pipeline needs (latest compatible versions are installed).
+# Pipeline (declarative syntax, stages, input step)
+workflow-aggregator
+# Fetch code from Git / GitHub and receive GitHub webhooks
+git
+github
+# SonarQube: withSonarQubeEnv + waitForQualityGate
+sonar
+# Show test results and keep credentials safe
+junit
+credentials-binding
+# Nicer build view, timestamps in logs, workspace clean-up
+pipeline-stage-view
+timestamper
+ws-cleanup

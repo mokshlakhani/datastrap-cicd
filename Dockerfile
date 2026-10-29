@@ -10,6 +10,12 @@ ENV HOST=0.0.0.0 \
     PORT=8080 \
     PYTHONUNBUFFERED=1
 
+# Install the operating system's latest security patches (a pinned base image gets older every week;
+# without this, the Trivy scan in the pipeline would find known holes in it).
+RUN apt-get update \
+ && apt-get upgrade -y --no-install-recommends \
+ && rm -rf /var/lib/apt/lists/*
+
 # Run as a normal user instead of root, so a bug cannot damage the container.
 RUN useradd --create-home --uid 10001 appuser
 
