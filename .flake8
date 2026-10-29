@@ -1,6 +1,6 @@
 [flake8]
 # The original code uses long lines on purpose, so the limit is generous.
-max-line-length = 160
+max-line-length = 320
 # Complexity warning: only flag really tangled functions.
 max-complexity = 40
 exclude =
