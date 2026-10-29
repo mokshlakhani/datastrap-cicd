@@ -28,7 +28,7 @@ open three browser tabs: Jenkins job page (<http://localhost:8090>), SonarQube p
    make demo-fail
    ```
    *"This makes a branch called demo-fail with one test that always fails, and pushes it."*
-2. In Jenkins start (or wait for) the `demo-fail` build. The **Test** stage turns **red**.
+2. In Jenkins: *Configure* the job, set Branch Specifier to `*/demo-fail`, save, click **Build Now**. (Set it back to `*/main` afterwards.) The **Test** stage turns **red**.
 3. Point at the stage view: *"Everything after Test is grey. SonarQube, Docker build and Deploy never ran. Bad code can't reach production. Jenkins even lists which test failed under Test Result."*
 4. Point at the app tab: *"Production is still running the last good version."*
 5. Clean up afterwards: `make demo-fail-clean`.

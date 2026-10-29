@@ -64,7 +64,7 @@ Name `jenkins`, URL `http://jenkins:8080/sonarqube-webhook/` (keep the trailing 
 **12. Create the pipeline job.** *New Item* -> name `datastrap-cicd` -> **Pipeline** -> OK. Then:
 * *Pipeline -> Definition:* **Pipeline script from SCM**
 * SCM: **Git**, Repository URL: `https://github.com/mokshlakhani/datastrap-cicd.git` (public repo, no credentials needed)
-* Branch Specifier: `*/*` (so every branch is built; only `main` deploys)
+* Branch Specifier: `*/main`. (A plain Pipeline job builds one branch. For the failure demo, temporarily change it to `*/demo-fail`, build, then change it back. Only `main` ever deploys.)
 * Script Path: `Jenkinsfile`
 * Under *Build Triggers* tick **GitHub hook trigger for GITScm polling** and **Poll SCM** (schedule `H/5 * * * *`). The Jenkinsfile also declares these after the first run.
 *Save*.
