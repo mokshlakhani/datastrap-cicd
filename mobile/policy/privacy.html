@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DataStrap Privacy Policy</title>
+  <style>
+    :root { color-scheme: dark; --bg: #050506; --fg: #e8e8ea; --muted: #9a9aa3; --accent: #4fd1c5; }
+    @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --bg: #fafafa; --fg: #15151a; --muted: #5b5b66; --accent: #0f766e; } }
+    :root[data-theme="light"] { --bg: #fafafa; --fg: #15151a; --muted: #5b5b66; --accent: #0f766e; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 -apple-system, system-ui, sans-serif; }
+    main { max-width: 720px; margin: 0 auto; padding: 32px 16px 64px; }
+    h1 { font-size: 28px; margin: 0 0 4px; }
+    h2 { font-size: 18px; margin: 28px 0 8px; }
+    p, li { color: var(--fg); }
+    .muted { color: var(--muted); }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+<main>
+  <h1>DataStrap Privacy Policy</h1>
+  <p class="muted">Last updated: 18 October 2026</p>
+
+  <p>DataStrap is a personal health dashboard. It runs in your web browser or on your phone and works out recovery, strain, sleep and related scores from your own health data. This policy explains what happens to your information.</p>
+
+  <h2>Summary</h2>
+  <ul>
+    <li>Your health data is stored on your device, not on a DataStrap server. The developer does not receive it.</li>
+    <li>DataStrap reads your data directly from the Google Health API after you sign in with Google.</li>
+    <li>DataStrap has no advertising, analytics or tracking code, and does not sell or share your data.</li>
+<li>If you choose to make a Today portrait, the photo you pick is sent once to Google's Gemini to create it. Nothing is sent unless you do this, and the portrait is kept only on your device.</li>
+  </ul>
+
+  <h2>Data DataStrap reads from Google</h2>
+  <p>When you sign in, you grant DataStrap read-only access to your Google Health data: activity and fitness, sleep, health metrics and measurements (such as heart rate, heart rate variability, SpO₂, skin temperature and breathing rate), settings, and your profile (name, age, height, weight and time zone).</p>
+  <p>DataStrap asks for one write permission, <em>activity and fitness (write)</em>, only if you use the Log + feature to record a workout. Without it, the app cannot save workouts to your Google Health account.</p>
+
+  <h2>Where your data is stored</h2>
+  <p>Downloaded data is kept in your browser's storage (IndexedDB) or the app's private storage on your device. Your health data is never uploaded to a DataStrap server. You can remove it by clearing the site's data in your browser, or by deleting the app from your home screen.</p>
+
+  <h2>Sign-in helper</h2>
+  <p>So that the web version stays signed in for longer than an hour, it uses a small sign-in helper run by the developer on Cloudflare Workers. When you sign in, and about once an hour after that, the app sends the helper Google's one-time sign-in code or your sign-in renewal token. The helper adds the app's client secret, passes the request to Google, and returns Google's reply to your device. It never sees your health data, and it does not store or log these codes or tokens. The Android app doesn't use it for sign-in. Both versions use the same helper for the optional Today portrait, described next.</p>
+
+  <h2>Optional Today portrait</h2>
+<p>You can choose to put a portrait of yourself on the Today page, with your vitals pinned to it. This is off unless you make one, and it only happens after you confirm that the photo is of you and agree to it being sent to Google Gemini.</p>
+<ul>
+<li><strong>What is sent:</strong> the photo you pick, shrunk to at most 1024 pixels and with its metadata (such as location) removed on your device, plus your current Google sign-in token.</li>
+<li><strong>Where it goes:</strong> to the developer's helper on Cloudflare Workers, which passes the photo to Google's Gemini API to check that it shows one person's face, to make a side-profile portrait in DataStrap's style, and to find where the vitals go on it. The helper returns the portrait to your device.</li>
+<li><strong>What is kept:</strong> the helper does not store or log your photo or the portrait. To limit each person to three tries a week, it uses your sign-in token once to read your Google Health profile ID and keeps only a one-way, salted fingerprint of that ID with a count of this week's tries, which is deleted after eight days. Your health data is not sent.</li>
+<li><strong>Google:</strong> the developer uses Google's paid Gemini API, under which Google does not use your photo or portrait to improve its products. Google may keep them for a limited time to detect abuse, as its <a href="https://ai.google.dev/gemini-api/terms" rel="noopener">Gemini API terms</a> describe.</li>
+<li><strong>On your device:</strong> the portrait is saved with your health data. Remove it any time from the ↻ sheet (Today portrait → Remove), or by clearing the app's data.</li>
+</ul>
+<p>Only use a photo of yourself. Don't upload photos of other people.</p>
+
+<h2>Optional Google Takeout import</h2>
+  <p>If you import a Google Takeout export, the file is read on your device. Only the values DataStrap needs, such as VO₂ max, are kept. The file itself is not uploaded.</p>
+
+  <h2>Feedback form</h2>
+  <p>If you use "Send feedback" in the app, the message you write is sent to the developer through a Google Form. A contact address is sent only if you enter one.</p>
+  <p>If a page fails to load, the app can show a "Send report" button. Pressing it sends the error text to the same form. Nothing is sent automatically.</p>
+  <p>Both feedback and error reports include a short technical note: the app version, the date and time, the platform, and the most recent error message, if any, with email addresses, sign-in tokens, long IDs and measurements removed. This note does not include your health data. Don't put health details in a message unless you are happy for the developer to read them.</p>
+
+  <h2>Google sign-out</h2>
+  <p>You can revoke DataStrap's access at any time in your Google Account settings (myaccount.google.com, under Security, third-party access). DataStrap also sends a revoke request to Google when you sign out.</p>
+
+  <h2>Use of Google user data</h2>
+  <p>DataStrap's use and transfer of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
+
+  <h2>Children</h2>
+  <p>DataStrap is not intended for children under 13, and the developer does not knowingly collect information from them.</p>
+
+  <h2>Changes</h2>
+  <p>If this policy changes, the new version will be published on this page with a new "Last updated" date.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about this policy can be sent with the "Send feedback" form in the app.</p>
+
+  <p class="muted"><a href="./">Back to DataStrap</a> · <a href="terms.html">Terms of Service</a></p>
+</main>
+</body>
+</html>

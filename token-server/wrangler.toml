@@ -1,0 +1,37 @@
+name = "datastrap-token"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+[vars]
+# The web app's Google client ID (public) and its addresses.
+GOOGLE_CLIENT_ID = "724732375940-8u76pdrhajo7b9q7fbkj4ak0vkb5u866.apps.googleusercontent.com"
+# https://localhost is the Android app (for the portrait; it doesn't use sign-in here).
+ALLOWED_ORIGINS = "https://mokshlakhani.github.io,http://localhost:8092,https://localhost"
+# The exact sign-in pages Google sends people back to (as registered in Google Cloud).
+ALLOWED_REDIRECTS = "https://mokshlakhani.github.io/DataStrap/,http://localhost:8092/"
+# From this date (UTC; or "true"/"false"), plain refresh tokens from app
+# versions before bound sign-in (2026-10-18) are refused and those people sign
+# in again. Until then they're moved onto the bound form on their next refresh.
+REQUIRE_BOUND = "2026-11-15"
+# Today portrait (POST /portrait): Gemini models and tries per person per week.
+GEMINI_IMAGE_MODEL = "gemini-nano-banana-2.1"
+GEMINI_CHECK_MODEL = "gemini-3.5-flash-lite"
+PORTRAIT_WEEKLY_LIMIT = "3"
+
+# The client secret and the sealing key are NOT here. Set them once with:
+#   npx wrangler secret put GOOGLE_CLIENT_SECRET
+#   openssl rand -base64 32 | npx wrangler secret put SEAL_KEY
+# (A new SEAL_KEY signs every web app user out.)
+# The portrait also needs (until then /portrait answers "not_configured"):
+#   npx wrangler secret put GEMINI_API_KEY      (a paid-tier Gemini API key)
+#   npx wrangler secret put PORTRAIT_SALT       (any long random string)
+# and the KV namespace below (npx wrangler kv namespace create PORTRAIT_LIMITS).
+
+# Counts of this week's portrait tries (salted hashes, 8-day expiry).
+[[kv_namespaces]]
+binding = "PORTRAIT_LIMITS"
+id = "1df854431505481ea37978849f218d0a"
+
+[observability]
+enabled = false
